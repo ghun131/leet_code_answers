@@ -1,2 +1,3 @@
-# leet_code_answers
-# leet_code_answers
+## Leet Code answers
+
+[Shortcut to my 75 leetcode TS](https://leetcode.com/studyplan/leetcode-75/)
