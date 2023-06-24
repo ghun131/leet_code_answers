@@ -26,7 +26,6 @@ function reverseList(head: ListNode | null): ListNode | null {
   const newHead = reverseList(head.next);
   head.next.next = head;
   head.next = null;
-  console.log("newHead", newHead);
 
   return newHead;
 }
@@ -36,18 +35,13 @@ function reverseList(head: ListNode | null): ListNode | null {
 //   let curr = head;
 
 //   while (curr) {
-//     // three ways swap a linked list
+     // three ways swap a linked list
 //     const next = curr.next;
-//     console.log("next", next);
 
 //     curr.next = prev;
-//     console.log("curr.next", curr.next);
 
 //     prev = curr;
-//     console.log("prev", prev);
 //     curr = next;
-//     console.log("curr", curr);
-//     debugger;
 //   }
 
 //   return prev;
