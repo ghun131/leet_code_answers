@@ -20,36 +20,35 @@ function createLinkedList(array: number[]) {
   return result;
 }
 
-function reverseList(head: ListNode | null): ListNode | null {
-  if (!head || !head?.next) return head;
-
-  const newHead = reverseList(head.next);
-  head.next.next = head;
-  head.next = null;
-
-  return newHead;
-}
-
 // function reverseList(head: ListNode | null): ListNode | null {
-//   let prev = null;
-//   let curr = head;
-
-//   while (curr) {
-     // three ways swap a linked list
-//     const next = curr.next;
-
-//     curr.next = prev;
-
-//     prev = curr;
-//     curr = next;
-//   }
-
-//   return prev;
+//   if (!head || !head?.next) return head;
+//
+//   const newHead = reverseList(head.next);
+//   head.next.next = head;
+//   head.next = null;
+//
+//   return newHead;
 // }
+
+function reverseList(head: ListNode | null): ListNode | null {
+    let prev = null;
+    let curr = head;
+
+    while (curr) {
+        const cached = curr.next;
+
+        curr.next = prev;
+        prev = curr;
+
+        curr = cached
+    }
+
+    return prev
+}
 const first = createLinkedList([1, 2, 3, 4]);
 // const second = createLinkedList([1, 4, 5]);
 
 const result = reverseList(first);
-// console.log("result", JSON.stringify(result));
+ console.log("result", JSON.stringify(result));
 
 // NOTE: I don't understand the solution above
