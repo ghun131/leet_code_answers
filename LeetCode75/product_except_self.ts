@@ -1,5 +1,5 @@
 // function productExceptSelf(nums: number[]): number[] {
-//     const output = [];
+//     const output: number[] = [];
 //     let leftMult = 1;
 //     let rightMult = 1;
 //     for (let i=nums.length - 1; i >= 0; i--) {
@@ -32,7 +32,6 @@ function productExceptSelf(nums: number[]): number[] {
 
     return output;
 }
-
 
 console.log(productExceptSelf([1,2,3,4]));
 console.log(productExceptSelf([-1, 1,0,-3,3]))
