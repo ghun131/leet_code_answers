@@ -9,30 +9,24 @@ class TreeNode {
     }
 }
 
-// function maxDepth(root: TreeNode | null): number {
-//     if (!root || root.val === undefined) return 0;
-//     const stack = [root];
-//     let depth = 0;
-//
-//     while(stack.length > 0) {
-//         const nodes = stack.splice(0, stack.length);
-//
-//         for (let i = 0; i < nodes.length; ++i) {
-//             if (nodes[i]?.left) stack.push(nodes[i].left);
-//             if (nodes[i]?.right) stack.push(nodes[i].right);
-//         }
-//
-//         depth += 1;
-//     }
-//
-//     return depth;
-// };
-
 function maxDepth(root: TreeNode | null): number {
+    if (!root || root.val === undefined) return 0;
+    const stack = [root];
+    let depth = 0;
 
+    while(stack.length > 0) {
+        const nodes = stack.splice(0, stack.length);
 
-}
+        for (let i = 0; i < nodes.length; ++i) {
+            if (nodes[i]?.left) stack.push(nodes[i].left as TreeNode);
+            if (nodes[i]?.right) stack.push(nodes[i].right as TreeNode);
+        }
 
+        depth += 1;
+    }
+
+    return depth;
+};
 
 const tree1 = {
     val: 3,
