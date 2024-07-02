@@ -14,26 +14,35 @@
 // };
 
 function productExceptSelf(nums: number[]): number[] {
-    const output = Array(nums.length).fill(1);
-    let l = 0;
-    let r = nums.length - 1;
-    let leftMul = 1;
-    let rightMul = 1;
+  const output = Array(nums.length).fill(1);
+  let l = 0;
+  let r = nums.length - 1;
+  let leftMul = 1;
+  let rightMul = 1;
 
-    while (r >= 0) {
-        output[r] *= rightMul;
-        rightMul *= nums[r];
-        r--
+  let logLeft = "";
+  let logRight = "";
 
-        output[l] *= leftMul;
-        leftMul *= nums[l];
-        l++
-    }
+  while (r >= 0) {
+    logLeft += `l: ${l}, nums[l]: ${nums[l]}, leftMul: ${leftMul}, output: ${output} \n`;
+    leftMul *= nums[l];
+    output[l] *= leftMul;
+    l++;
 
-    return output;
+    logRight += `r: ${r}, nums[r]: ${nums[r]}, rightMul: ${rightMul}, output: ${output} \n`;
+    rightMul *= nums[r];
+    output[r] *= rightMul;
+    r--;
+  }
+
+  console.log(logLeft);
+  console.log(logRight);
+
+  return output;
 }
 
-console.log(productExceptSelf([1,2,3,4]));
-console.log(productExceptSelf([-1, 1,0,-3,3]))
-console.log(productExceptSelf([0,0]))
-console.log(productExceptSelf([4,3,2,1,2]))
+// console.log(productExceptSelf([1,2,3,4]));
+// console.log(productExceptSelf([-1, 1,0,-3,3]))
+// console.log(productExceptSelf([0,0]))
+// console.log(productExceptSelf([4,3,2,1,2]))
+console.log(productExceptSelf([4, 5, 1, 8, 2, 10, 6]));
