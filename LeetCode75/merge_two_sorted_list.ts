@@ -63,4 +63,5 @@ const second = createLinkedList([1, 4, 5]);
 
 const result = mergeTwoLists(first, second);
 
-console.log("RESULT", JSON.stringify(result));
+// console.log("RESULT", JSON.stringify(result));
+console.log(JSON.stringify(result));
