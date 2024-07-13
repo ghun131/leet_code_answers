@@ -9,43 +9,47 @@ class TreeNode {
   }
 }
 
-function allPossibleBST(
+function allPossibleTree(
   start: number,
   end: number,
-  memo: { [key: string]: Array<TreeNode | null> }
+  memo: Map<string, Array<TreeNode | null>>
 ): Array<TreeNode | null> {
-  const res: Array<TreeNode | null> = [];
+  const result: Array<TreeNode | null> = [];
+
   if (start > end) {
-    res.push(null);
-    return res;
+    result.push(null);
+
+    return result;
   }
-  const key: string = start + "," + end;
-  if (memo[key] != undefined) {
-    return memo[key];
+  const key = start + "," + end;
+  const value = memo.get(key);
+  if (value != undefined) {
+    return value;
   }
+
   for (let i = start; i <= end; ++i) {
-    const leftSubTrees: Array<TreeNode | null> = allPossibleBST(
-      start,
-      i - 1,
-      memo
-    );
-    const rightSubTrees: Array<TreeNode | null> = allPossibleBST(
-      i + 1,
-      end,
-      memo
-    );
-    for (const left of leftSubTrees) {
-      for (const right of rightSubTrees) {
-        let root = new TreeNode(i, left, right);
-        res.push(root);
+    const leftSubTree = allPossibleTree(start, i - 1, memo);
+    const rightSubTree = allPossibleTree(i + 1, end, memo);
+
+    for (const left of leftSubTree) {
+      for (const right of rightSubTree) {
+        const root = new TreeNode(i, left, right);
+        result.push(root);
       }
     }
   }
-  memo[key] = res;
-  return res;
-}
-function generateTrees(n: number): Array<TreeNode | null> {
-  const memo: { [key: string]: Array<TreeNode | null> } = {};
-  return allPossibleBST(1, n, memo);
+
+  memo.set(key, result);
+  return result;
 }
 
+function generateTrees(n: number): Array<TreeNode | null> {
+  const memo = new Map();
+  return allPossibleTree(1, n, memo);
+}
+
+// const result = generateTrees(3);
+const result = generateTrees(4);
+console.log(JSON.stringify(result));
+
+// generateTrees(3);
