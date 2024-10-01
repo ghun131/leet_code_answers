@@ -63,4 +63,51 @@ const input = [1, 2, 3, 4, 5];
 const tree = buildTree(input);
 // console.log(JSON.stringify(tree));
 
-console.log(inorderTraversal(tree));
+const tree0 = {
+  val: 2,
+  left: {
+    val: 1,
+    left: null,
+    right: null,
+  },
+  right: {
+    val: 33,
+    left: {
+      val: 25,
+      left: {
+        val: 11,
+        left: {
+          val: 7,
+          left: null,
+          right: null,
+        },
+        right: {
+          val: 12,
+          left: null,
+          right: {
+            val: 13,
+            left: null,
+            right: null,
+          },
+        },
+      },
+      right: null,
+    },
+    right: {
+      val: 40,
+      left: {
+        val: 34,
+        left: null,
+        right: {
+          val: 36,
+          left: null,
+          right: null,
+        },
+      },
+      right: null,
+    },
+  },
+};
+
+// console.log(inorderTraversal(tree));
+console.log(inorderTraversal(tree0, []));

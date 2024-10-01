@@ -13,35 +13,8 @@ class TreeNode {
   }
 }
 
-function buildTree(nums: (number | null)[]) {
-  if (nums.length === 0) {
-    return null;
-  }
-  let root = new TreeNode(nums[0]);
-  let q = [root];
-  let i = 0;
-  while (i < nums.length) {
-    let curr = q.shift() as TreeNode;
-    if (i < nums.length) {
-      i++;
-      if (nums[i]) {
-        curr.left = new TreeNode(nums[i]);
-        q.push(curr.left);
-      }
-    }
-    if (i < nums.length) {
-      i++;
-      if (nums[i]) {
-        curr.right = new TreeNode(nums[i]);
-        q.push(curr.right);
-      }
-    }
-  }
-
-  return root;
-}
-
-function postorderTraversal(root: TreeNode | null): number[] {
+function postorderTraversal0(root: TreeNode | null): number[] {
+  // simple stack, reverse the result
   if (!root) return [];
 
   const stack = [root];
@@ -59,13 +32,116 @@ function postorderTraversal(root: TreeNode | null): number[] {
   return result.reverse();
 }
 
-// const input = [3, 2, 5, 3, 4, 8, 1, 6, null, null, null, 7, null, 13, 9];
-// const input = [3, 1, 4, 3, null, 1, 5];
-// const input = [1, 2, 3, 4, 5];
-const input = [1, 2, 2, 3, 4, 4, 3];
-// const input = [2, null, 4, 10, 8, null, null, 4];
+function postorderTraversal1(root: TreeNode | null): number[] {
+  // ONE stack. Pre is previously printed node.
+  // Only print a node if right child is null or equal to pre
 
-const tree = buildTree(input);
+  const out: number[] = [];
+  if (root === null) return out;
+
+  let pre: TreeNode | null = null;
+  const stack: TreeNode[] = [];
+
+  while (root !== null || stack.length > 0) {
+    if (root !== null) {
+      stack.push(root as TreeNode);
+      root = root.left;
+    } else {
+      root = stack[stack.length - 1];
+
+      if (root.right === null || root.right === pre) {
+        out.push(root.val as number);
+        stack.pop();
+        pre = root;
+        root = null;
+      } else {
+        root = root.right;
+      }
+    }
+  }
+
+  return out;
+}
+
+function postorderTraversal2(root: TreeNode | null): number[] {
+  // TWO stacks.
+  const out: number[] = [];
+  if (!root) return out;
+
+  const stack = [root];
+  const path: TreeNode[] = [];
+
+  while (stack.length > 0) {
+    root = stack[stack.length - 1];
+
+    if (path.length > 0 && root === path[path.length - 1]) {
+      out.push(root.val as number);
+      stack.pop();
+      path.pop();
+    } else {
+      path.push(root);
+      if (root.right) stack.push(root.right);
+      if (root.left) stack.push(root.left);
+    }
+  }
+
+  return out;
+}
+
+const tree = {
+  val: 1,
+  left: {
+    val: 2,
+    left: {
+      val: 4,
+      left: null,
+      right: null,
+    },
+    right: {
+      val: 5,
+      left: {
+        val: 6,
+        left: null,
+        right: null,
+      },
+      right: {
+        val: 7,
+        left: null,
+        right: null,
+      },
+    },
+  },
+  right: {
+    val: 3,
+    left: null,
+    right: {
+      val: 8,
+      left: {
+        val: 9,
+        left: null,
+        right: null,
+      },
+      right: null,
+    },
+  },
+};
+
+const tree1 = {
+  val: 1,
+  left: null,
+  right: {
+    val: 2,
+    left: {
+      val: 3,
+      left: null,
+      right: null,
+    },
+    right: null,
+  },
+};
 // console.log(JSON.stringify(tree));
 
-console.log(postorderTraversal(tree));
+// console.log(postorderTraversal0(tree));
+// console.log(postorderTraversal1(tree));
+// console.log(postorderTraversal2(tree));
+console.log(postorderTraversal2(tree1));

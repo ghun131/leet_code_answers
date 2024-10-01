@@ -85,11 +85,56 @@ function inorderTraversal(root: TreeNode | null): number[] {
 
 // const input = [3, 2, 5, 3, 4, 8, 1, 6, null, null, null, 7, null, 13, 9];
 // const input = [2, 1, 4, 3, null, 1, 5];
-const input = [1, 2, 2, 3, 4, 4, 3];
+// const input = [1, 2, 2, 3, 4, 4, 3];
 // const input = [1, null, 0, 3];
 // const input = [2, null, 4, 10, 8, null, null, 4];
 
-const tree = buildTree(input);
-// console.log(JSON.stringify(tree));
+// const tree = buildTree(input);
+const tree0 = {
+  val: 2,
+  left: {
+    val: 1,
+    left: null,
+    right: null,
+  },
+  right: {
+    val: 33,
+    left: {
+      val: 25,
+      left: {
+        val: 11,
+        left: {
+          val: 7,
+          left: null,
+          right: null,
+        },
+        right: {
+          val: 12,
+          left: null,
+          right: {
+            val: 13,
+            left: null,
+            right: null,
+          },
+        },
+      },
+      right: null,
+    },
+    right: {
+      val: 40,
+      left: {
+        val: 34,
+        left: null,
+        right: {
+          val: 36,
+          left: null,
+          right: null,
+        },
+      },
+      right: null,
+    },
+  },
+};
 
-console.log(inorderTraversal(tree));
+// console.log(inorderTraversal(tree));
+console.log(inorderTraversal(tree0, []));
